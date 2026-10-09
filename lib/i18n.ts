@@ -157,6 +157,7 @@ export const translations = {
     footer: {
       builtFor: 'FoodLens — Designed for Bangladesh and global conscious consumers.',
       rights: 'Evidence-based food transparency.',
+      createdBy: 'Created by Sayemur Rahman',
     },
   },
   bn: {
@@ -315,6 +316,7 @@ export const translations = {
     footer: {
       builtFor: 'ফুডলেন্স — বাংলাদেশের ও সচেতন ভোক্তাদের জন্য নির্মিত।',
       rights: 'প্রমাণভিত্তিক খাদ্য সচেতনতা।',
+      createdBy: 'নির্মাতা: সায়েমুর রহমান',
     },
   },
 };
