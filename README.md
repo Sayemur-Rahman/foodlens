@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FoodLens — Food Ingredient Safety & Health Analyzer
+*(ফুডলেন্স — খাদ্য উপাদানের নিরাপত্তা ও স্বাস্থ্য বিশ্লেষক)*
 
-## Getting Started
+FoodLens is a modern, responsive, bilingual web application (English + বাংলা) that decodes packaged food labels into clear, evidence-based health and safety insights.
 
-First, run the development server:
+---
 
+## 🌟 Key Features
+
+1. **Bilingual Experience (English & বাংলা)**:
+   - Instant language switcher in the header (`EN | বাংলা`).
+   - Every ingredient, health explanation, category, and concern badge is translated naturally into Bengali and English.
+   - Handles mixed-language package labels (e.g. `Ingredients: Sugar, চিনি, E621, Milk Powder`).
+
+2. **Smart OCR with Human-in-the-Loop Verification**:
+   - Mobile-first camera capture (`Take Photo`) and drag-and-drop file upload.
+   - Google Gemini 2.5 Flash Vision OCR extraction.
+   - **Verification Modal**: Displays detected text for user review before running analysis. Highlights typos (e.g. `E62I` → `E621`) so uncertain OCR output is never silently analyzed.
+
+3. **Evidence-Based Ingredient Database**:
+   - Structured profiles for E-numbers, INS codes, chemical names, and Bengali names.
+   - 4-Tier Safety Concern Classification:
+     - 🟢 **Low Concern**: Generally recognized as safe in normal permitted amounts.
+     - 🟡 **Moderate Concern**: Worth moderating based on intake volume or frequency.
+     - 🟠 **Higher Concern**: Deserves closer attention due to documented sensitivities (e.g., Tartrazine child activity warnings, Aspartame).
+     - 🔴 **High Concern**: Potentially significant under specific circumstances (e.g., severe allergens).
+   - "What Can It Cause?" section using calm, scientific language without fear-mongering.
+
+4. **Allergen Alert & Personal Profile**:
+   - Auto-detects top allergens: Milk, Wheat/Gluten, Peanuts, Soy, Eggs, Fish.
+   - User profile settings (`/preferences`) to flag specific allergens or dietary concerns (High Sugar, High Sodium, Artificial Colors, Preservatives).
+   - Dynamic alerts when a scanned product matches your avoidance criteria.
+
+5. **Side-by-Side Product Comparison (`/compare`)**:
+   - Compare two packaged products (Product A vs Product B) on concern scores, total additives, allergens, and high-concern items.
+   - Generates a balanced, objective verdict without declaring products universally "healthy".
+
+6. **Searchable Encyclopedia (`/ingredients`)**:
+   - Instant search by E-code, INS number, English name, or Bengali name.
+   - Rich pop-up modal with regulatory status (FDA, EFSA, Codex) and review dates.
+
+7. **Scan History**:
+   - Saves recent scans locally in browser storage with one-click reload or deletion.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Requirements
+- Node.js 18+ installed
+
+### 2. Configure Gemini API Key (Optional for OCR)
+Copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+Add your free Google Gemini API key:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+*(Note: FoodLens works even without an API key by providing smart mock OCR output and full local database matching!)*
+
+### 3. Run Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Build for Production
+```bash
+npm run build
+npm start
+```
